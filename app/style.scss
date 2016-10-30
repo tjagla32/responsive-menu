@@ -1,0 +1,108 @@
+///////////////////////////////
+$bg-menu: blue;
+$color-menu: #fff;
+$height-menu: 75px;
+$color-hamburger: #fff;
+$break-point: 767px;
+$sidebar-width: 75%;
+///////////////////////////////
+@mixin m-transition() {
+  transition: all 0.3s ease-in-out;
+}
+///////////////////////////////
+.container{
+  width: 50%;
+  margin: 100px auto 0;
+  text-align: justify;
+}
+
+header{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  //height: $height-menu;
+  background-color: $bg-menu;
+  padding: $height-menu*0.1 0px;
+  a{
+    color: $color-menu;
+    text-decoration: none;
+    font-size: 20px;
+    @include m-transition;
+    &:hover{
+      color: darken($color-menu, 40%);
+    }
+  }
+  .header-icon{
+    float: right;
+    padding: 5px;
+    //border: 1px solid $color-hamburger;
+    border-radius: 3px;
+    margin: 0 10px;
+    transform: translateY(60%);
+    .icon-bar {
+      display: block;
+      width: 25px;
+      height: 3px;
+      border-radius: 1px;
+      background-color: $color-hamburger;
+      @include m-transition;
+      position: relative;
+      & + .icon-bar {
+        margin-top: 4px;
+      }
+    }
+    &:hover{
+      .icon-bar{
+        background-color: darken($color-hamburger, 20%);
+      }
+    }
+  }
+  .header-logo{
+    margin: 0 15px;
+    float: left;
+    img{
+      width: $height-menu*0.75;
+      height: $height-menu*0.75;
+    }
+  }
+  nav{
+    overflow: hidden;
+    @include m-transition;
+    a{
+      float: left;
+      margin: 10px 7px;
+      @include m-transition;
+      transform: translateY(35%);
+    }
+  }
+}
+@media screen and (min-width: $break-point + 1px){
+  .header-icon{
+    display: none;
+  }
+}
+@media screen and (max-width: $break-point){
+  .container{
+    width: 90%;
+  }
+  nav{
+    background-color: rgba(0,0,255, .75);
+    position: absolute;
+    width: $sidebar-width;
+    height: 2000%;
+    right: 100%;
+    display: flex;
+    flex-direction: column;
+    a{
+      text-align: center;
+      font-size: 36px;
+      &:first-child{
+        margin-top: 100px;
+      }
+    }
+  }
+  .sidebar{
+    right: 100%-$sidebar-width;
+  }
+}
